@@ -37,9 +37,7 @@ function main(zm,ym,xm)
 		xm = 0
 	end
 
-	if tpos == nil then
-		tpos = tposInit()
-	end
+	tpos = tposInit()
 
 	Refuel(zm)
 
