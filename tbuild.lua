@@ -71,14 +71,15 @@ function clearBlock()
 end
 
 function moveBack()
-	if turtle.back() == false then
-		clearBlock()
-		if turtle.back() == false then
-			return false
-		end
-	else
+	if turtle.back() == true then
 		return true
+	else
+		clearBlock()
+		if turtle.back() == true then
+			return true
+		end
 	end
+	return false
 end
 
 function buildLine(count)
