@@ -1,5 +1,6 @@
 -- tbuild
-require 'tpos.lua'
+rlocal tposLib = assert(loadfile('./tpos.lua'))
+tposLib()
 
 local args = {...}
 
@@ -36,7 +37,11 @@ function main(zm,ym,xm)
 	if xm == nil then
 		xm = 0
 	end
-	
+
+	if tpos == nil then
+		tpos = tposInit()
+	end
+
 	Refuel(zm)
 
 --	turtle.select(2)
