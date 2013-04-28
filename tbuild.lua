@@ -44,6 +44,7 @@ function main(zm,ym,xm)
 	Refuel(zm)
 
     turtle.select(2)
+    tpos.placeMode = true
 --	buildLine(zm)
 
 	jQ = jobQueue.new()
