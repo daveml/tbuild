@@ -107,7 +107,9 @@ function main(zm,ym,xm)
 	end
 	
 	Refuel(zm)
-		
+
+	turtle.select(2)
+	
 	buildLine(zm)
 
 end
