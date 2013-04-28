@@ -43,7 +43,7 @@ function main(zm,ym,xm)
 
 	Refuel(zm)
 
---	turtle.select(2)
+    turtle.select(2)
 --	buildLine(zm)
 
 	jQ = jobQueue.new()
