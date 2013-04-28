@@ -169,15 +169,21 @@ end
 
 function tposMoveFwd(tpos,count)
 	for i=1, count do
-		if turtle.detect() == false then
-			_tposMoveFwd(tpos)
-		elseif tpos.canBreakOnMove and turtle.dig() then
-			_tposMoveFwd(tpos)
+		if tpos.placeMode == false then
+			if turtle.detect() == false then
+				_tposMoveFwd(tpos)
+			elseif tpos.canBreakOnMove and turtle.dig() then
+				_tposMoveFwd(tpos)
+			else
+				print("Blocked!")
+				return false
+			end
 		else
-			print("Blocked!")
-			return false
+			-- Place Mode
+			tposMoveTurnAround(tpos)
+			tposMoveBack(tpos,count)
+			tposMoveTurnAround(tpos)
 		end
-	end
 	return true
 end
 
@@ -312,32 +318,16 @@ function tposMoveY(tpos, count)
 end
 
 function tposMoveAbs(tpos,z,x,y)
-	if tpos.placeMode then
-		tposMoveTurnAround(tpos)
-		z = -z
-		x = -x
-	end
 	if tposMoveZ(tpos, z - tpos.z) == false then return false end
 	if tposMoveX(tpos, x - tpos.x) == false then return false end
 	if tposMoveY(tpos, y - tpos.y) == false then return false end
-	if tpos.placeMode then
-		tposMoveTurnAround(tpos)
-	end
 	return true
 end
 
 function tposMoveRel(tpos,z,x,y)
-	if tpos.placeMode then
-		tposMoveTurnAround(tpos)
-		z = -z
-		x = -x
-	end
 	if tposMoveZ(tpos, z) == false then return false end
 	if tposMoveX(tpos, x) == false then return false end
 	if tposMoveY(tpos, y) == false then return false end
-	if tpos.placeMode then
-		tposMoveTurnAround(tpos)
-	end
 	return true
 end
 
