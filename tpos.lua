@@ -184,6 +184,7 @@ function tposMoveFwd(tpos,count)
 			tposMoveBack(tpos,count)
 			tposMoveTurnAround(tpos)
 		end
+	end
 	return true
 end
 
