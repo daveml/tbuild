@@ -112,4 +112,4 @@ function main(zm,ym,xm)
 
 end
 
-main()
+main(zm,ym,xm)
