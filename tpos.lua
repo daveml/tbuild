@@ -227,6 +227,7 @@ function tposMoveUp(tpos,count)
 			end
 			if turtle.placeDown() == false then return false end
 		end
+	end
 	return true
 end
 
