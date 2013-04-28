@@ -6,6 +6,11 @@ local zm = tonumber(args[1])
 local xm = tonumber(args[2])
 local ym = tonumber(args[3])
 
+function usage()
+	print("--tbuild")
+	print("usage: tbuild z y x")
+
+end
 
 function movefwd(count)
 	for i=1, count do
@@ -101,6 +106,8 @@ function main(zm,ym,xm)
 		xm = 0
 	end
 	
+	Refuel(zm)
+		
 	buildLine(zm)
 
 end
