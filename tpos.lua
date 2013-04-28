@@ -1,13 +1,5 @@
 -- tmove
 
-local args = {...}
-
-local zm = tonumber(args[1])
-local xm = tonumber(args[2])
-local ym = tonumber(args[3])
-local d = tonumber(args[4])
---local tpos = {}
-
 --===================================================
 --=  Niklas Frykholm 
 -- basically if user tries to create global variable
@@ -278,7 +270,7 @@ function tposMoveX(tpos, count)
 		return tposMoveSlideRight(tpos, count)
 	else
 		return tposMoveSlideLeft(tpos, -count)
-	end
+ 	end
 end
 	
 function tposMoveY(tpos, count)
@@ -308,6 +300,9 @@ function Q_tposMoveAbs(params)
 	tposMoveAbs(params[1],params[2],params[3],params[4])
 end
 
+function Q_tposMoveRel(params)
+	tposMoveRel(parans[1],params[2],params[3],params[4])
+end
 
 function Refuel(count)
 	print("Refueling...")
@@ -343,7 +338,7 @@ end
     
 function jobQueue.popleft (list)
     local first = list.first
-    if first > list.last then error("list is empty") end
+    if first > list.last then return nil end
     local value = list[first]
     list[first] = nil        -- to allow garbage collection
     list.first = first + 1
@@ -352,62 +347,25 @@ end
     
 function jobQueue.popright (list)
     local last = list.last
-    if list.first > last then error("list is empty") end
+    if list.first > last then return nil end
     local value = list[last]
     list[last] = nil         -- to allow garbage collection
     list.last = last - 1
 	return value
 end
 
-
-
-function main()
-	GLOBAL_lock(__LOCK_TABLE)
-	
-	if tpos == nil then
-		tpos = tposInit()
+function jobQueue.run (list)
+	while true do
+		job = jobQueue.popleft(list)
+		if job == nil then
+			return true
+		end
+		if job[1](job[2]) == false then
+			return false
+		end
 	end
-	
-	if zm == nil then
-		usage()
-		return
-	end
-	
-	if ym == nil then
-		ym = 0
-	end
-	if xm == nil then
-		xm = 0
-	end
-		
-	if Refuel(zm+ym+xm) == false then
-		return
-	end
-	
-	print("Turtle moving")
-	
-	jQ = jobQueue.new()
-
-	params = {tpos, zm, xm, ym}
-	job = {Q_tposMoveAbs, {tpos, zm, xm, ym}}
-	jobQueue.pushright(jQ, job)
-	
-	job = jobQueue.popleft(jQ, job)
-	
-	job[1](job[2])
-	
---	if tposMoveAbs(tpos, zm, xm, ym) == false then 
---		print("Move failed!")
---		exit(0)
---	end
-	
---	if tposMoveRel(tpos,-zm,-xm,-ym) == false then
---		print("Move failed!")
---		exit(0)
---	end
-	
-
 end
 
+		
+		
 
-main()
