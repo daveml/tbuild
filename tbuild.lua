@@ -1,5 +1,5 @@
 -- tbuild
-rlocal tposLib = assert(loadfile('./tpos.lua'))
+local tposLib = assert(loadfile('./tpos.lua'))
 tposLib()
 
 local args = {...}
