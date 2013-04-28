@@ -318,7 +318,7 @@ function Refuel(count)
 	return true
 end
 
-local jobQueue = {}
+jobQueue = {}
 
 function jobQueue.new()
 	return {first = 0, last = -1}
