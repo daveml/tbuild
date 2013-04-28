@@ -1,5 +1,5 @@
 -- tbuild
-local tposLib = assert(loadfile('./tpos.lua'))
+local tposLib = assert(loadfile('/downloads/tbuild/tpos.lua'))
 tposLib()
 
 local args = {...}
@@ -13,7 +13,6 @@ function usage()
 	print("usage: tbuild z y x")
 
 end
-
 
 function clearBlock()
 	turtle.turnLeft()
