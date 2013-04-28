@@ -37,6 +37,7 @@ function tposInit()
 	tpos.dir=1
 	tpos.canBreakOnMove=true
 	tpos.debugPrint=true
+	tpos.placeMode=false
 	return tpos
 end
 
@@ -295,7 +296,6 @@ function tposMoveRel(tpos,z,x,y)
 	return true
 end
 
-
 function Q_tposMoveAbs(params)
 	tposMoveAbs(params[1],params[2],params[3],params[4])
 end
@@ -318,6 +318,7 @@ function Refuel(count)
 	return true
 end
 
+-- Argh this has to be in Global space for api?
 jobQueue = {}
 
 function jobQueue.new()
