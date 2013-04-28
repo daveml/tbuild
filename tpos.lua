@@ -197,9 +197,9 @@ function tposMoveBack(tpos,count)
 		else
 			-- Place Mode
 			if _tposMoveBack(tpos) == false then
-				tposMoveTurnAround()
+				tposMoveTurnAround(tpos)
 				if turtle.dig() == false then return false end
-				tposMoveTurnAround()
+				tposMoveTurnAround(tpos)
 				if _tposMoveBack(tpos) == false then return false end
 			end
 			if turtle.place() == false then return false end
@@ -313,7 +313,7 @@ end
 
 function tposMoveAbs(tpos,z,x,y)
 	if tpos.placeMode then
-		tposMoveTurnAround()
+		tposMoveTurnAround(tpos)
 		z = -z
 		x = -x
 	end
@@ -321,14 +321,14 @@ function tposMoveAbs(tpos,z,x,y)
 	if tposMoveX(tpos, x - tpos.x) == false then return false end
 	if tposMoveY(tpos, y - tpos.y) == false then return false end
 	if tpos.placeMode then
-		tposMoveTurnAround()
+		tposMoveTurnAround(tpos)
 	end
 	return true
 end
 
 function tposMoveRel(tpos,z,x,y)
 	if tpos.placeMode then
-		tposMoveTurnAround()
+		tposMoveTurnAround(tpos)
 		z = -z
 		x = -x
 	end
@@ -336,7 +336,7 @@ function tposMoveRel(tpos,z,x,y)
 	if tposMoveX(tpos, x) == false then return false end
 	if tposMoveY(tpos, y) == false then return false end
 	if tpos.placeMode then
-		tposMoveTurnAround()
+		tposMoveTurnAround(tpos)
 	end
 	return true
 end
