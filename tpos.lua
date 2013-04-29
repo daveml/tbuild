@@ -399,7 +399,7 @@ function Q_tposMoveAbs(params)
 end
 
 function Q_tposMoveRel(params)
-	tposMoveRel(parans[1],params[2],params[3],params[4])
+	tposMoveRel(params[1],params[2],params[3],params[4])
 end
 
 function Refuel(slot,count)
