@@ -111,7 +111,7 @@ function _tposMoveBack(tpos)
 		tposDecZX(tpos)
 		return true
 	else
-		tposPrint(tpos,"back() failed!")
+	--	tposPrint(tpos,"back() failed!")
 		return false
 	end
 end
