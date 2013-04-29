@@ -185,7 +185,8 @@ function tposMoveFwd(tpos,count)
 		end
 	else
 		-- Place Mode
-		if tposMoveBack(tpos,count) == false then return false end
+		print("cant move forward in placeMode")
+		return false
 	end		
 	return true
 end
@@ -239,7 +240,8 @@ function tposMoveBack(tpos,count)
 			-- Place Mode
 			if _tposMoveBack(tpos) == false then
 				tposMoveTurnAround(tpos)
-				if turtle.dig() == false then return false end
+				if tposDig() == false then return false end
+				tposMoveTurnAround(tpos)
 				if _tposMoveBack(tpos) == false then return false end
 			end
 			if tposPlace(tpos) == false then return false end
@@ -331,21 +333,17 @@ function tposMoveZ(tpos, count)
 	if tpos.placeMode == false then
 		if count > 0 then
 			tposSetDir(tpos,1)
-			return tposMoveFwd(tpos, count)
 		else
 			tposSetDir(tpos,3)
-			return tposMoveFwd(tpos, -count)
 		end
-		return tposMoveFwd(tpos, count)
+		return tposMoveFwd(tpos, math.abs(count))
 	else
 		if count > 0 then
 			tposSetDir(tpos,3)
-			return tposMoveBack(tpos, count)
 		else
 			tposSetDir(tpos,1)
-			return tposMoveBack(tpos, -count)
 		end
-		return tposMoveBack(tpos, count)
+		return tposMoveBack(tpos, math.abs(count))
 	end
 end
 
@@ -353,27 +351,25 @@ function tposMoveX(tpos, count)
 	if tpos.placeMode == false then
 		if count > 0 then
 			tposSetDir(tpos, 2)
-			return tposMoveFwd(tpos, count)
 		else
 			tposSetDir(tpos, 4)
-			return tposMoveFwd(tpos, -count)
 		end
+		return tposMoveFwd(tpos, math.abs(count))
 	else
 		if count > 0 then
 			tposSetDir(tpos, 4)
-			return tposMoveBack(tpos, count)
 		else
 			tposSetDir(tpos, 2)
-			return tposMoveBack(tpos, -count)
 		end
+		return tposMoveBack(tpos, math.abs(count))
 	end	 
 end
 	
 function tposMoveY(tpos, count)
 	if count > 0 then
-		return tposMoveUp(tpos, count)
+		return tposMoveUp(tpos, math.abs(count))
 	else
-		return tposMoveDown(tpos, -count)
+		return tposMoveDown(tpos, math.abs(count))
 	end
 end
 
