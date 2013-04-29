@@ -68,7 +68,7 @@ function main(zm,ym,xm)
 	
 	tposShow(tpos)
 	
-    turtle.select(2)
+ 	tposSetPlaceSlot(tpos,2)
 
    	tpos.placeMode = true
 
