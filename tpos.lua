@@ -41,6 +41,10 @@ function tposInit()
 	return tpos
 end
 
+function tposShow(tpos)
+	print("tpos: z=",tpos.z, " x=", tpos.x, "y=", tpos.y, "dir=", tpos.dir)
+end
+
 function tposPrint(tpos, str)
 	if tpos.debugPrint then 
 		print(str)
@@ -171,9 +175,9 @@ function tposMoveFwd(tpos,count)
 	if tpos.placeMode == false then
 		for i=1, count do
 			if turtle.detect() == false then
-				_tposMoveFwd(tpos)
-			elseif tpos.canBreakOnMove and turtle.dig() then
-				_tposMoveFwd(tpos)
+				if _tposMoveFwd(tpos) == false then return false end
+			elseif tpos.canBreakOnMove and tposDig() then
+				if _tposMoveFwd(tpos)  == false then return false end
 			else
 				print("Blocked!")
 				return false
@@ -181,7 +185,7 @@ function tposMoveFwd(tpos,count)
 		end
 	else
 		-- Place Mode
-		tposMoveBack(tpos,count)
+		if tposMoveBack(tpos,count) == false then return false end
 	end		
 	return true
 end
@@ -194,14 +198,39 @@ function tposPlace(tpos)
 	return true
 end
 
+function tposDig(tpos)
+	if turtle.dig() == false then
+		tposPrint("dig() failed")
+		return false 
+	end
+	return true
+end
+		
+function tposDigUp(tpos)
+	if turtle.digUp() == false then
+		tposPrint("digUp() failed")
+		return false 
+	end
+	return true
+end
+		
+function tposDigDown(tpos)
+	if turtle.digDown() == false then
+		tposPrint("dig() failed")
+		return false 
+	end
+	return true
+end
+		
 function tposMoveBack(tpos,count)
 	for i=1, count do
 		if tpos.placeMode == false then
 			if turtle.detect() == false then
 				_tposMoveBack(tpos)
-			elseif tpos.canBreakOnMove and turtle.dig() then
+			elseif tpos.canBreakOnMove then
+				if tposDig() == false then return false end
 				tposMoveTurnAround(tpos)
-				_tposMoveBack(tpos)
+				if _tposMoveBack(tpos) == false then return false end
 			else
 				print("Blocked!")
 				return false
@@ -209,6 +238,7 @@ function tposMoveBack(tpos,count)
 		else
 			-- Place Mode
 			if _tposMoveBack(tpos) == false then
+				tposMoveTurnAround(tpos)
 				if turtle.dig() == false then return false end
 				if _tposMoveBack(tpos) == false then return false end
 			end

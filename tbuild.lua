@@ -41,6 +41,8 @@ function main(zm,ym,xm)
 		tpos = tposInit()
 	end
 	
+	tposShow(tpos)
+	
 	Refuel(1,math.abs(zm)+math.abs(ym)+math.abs(xm))
     turtle.select(2)
 
@@ -52,6 +54,8 @@ function main(zm,ym,xm)
 	job = {Q_tposMoveAbs, {tpos, zm, xm, ym}}
 	jobQueue.pushright(jQ, job)
 	jobQueue.run(jQ)
+
+	tposShow(tpos)
 
 end
 
