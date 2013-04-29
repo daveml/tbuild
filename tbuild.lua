@@ -37,12 +37,15 @@ function main(zm,ym,xm)
 		xm = 0
 	end
 
-	tpos = tposInit()
-
+    if tpos == nil then
+		tpos = tposInit()
+	end
+	
 	Refuel(1,math.abs(zm)+math.abs(ym)+math.abs(xm))
     turtle.select(2)
 
-    tpos.placeMode = true
+   	tpos.placeMode = true
+
 --	buildLine(zm)
 
 	jQ = jobQueue.new()
