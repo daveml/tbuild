@@ -23,10 +23,14 @@ function clearBlock()
 end
 
 function buildHollow(jQ, tpos, z, x, y)
+	cz = tpos.z
+	cx = tpos.x
+	cy = tpos.y
+	
 	for height=1, y do
 		job = {Q_tposMoveRel, {tpos, z, x, height-1}}
 		jobQueue.pushright(jQ, job)
-		job = {Q_tposMoveRel, {tpos, 0, 0, height-1}}
+		job = {Q_tposMoveRel, {tpos, -z, -x, height-1}}
 		jobQueue.pushright(jQ, job)
 	end
 end
