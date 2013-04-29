@@ -52,6 +52,7 @@ function main(zm,ym,xm)
 
 	jQ = jobQueue.new()
 	job = {Q_tposMoveAbs, {tpos, zm, xm, ym}}
+	job = {Q_tposMoveAbs, {tpos, 0, 0, ym}}
 	jobQueue.pushright(jQ, job)
 	jobQueue.run(jQ)
 
