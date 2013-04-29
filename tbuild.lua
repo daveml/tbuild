@@ -39,7 +39,7 @@ function main(zm,ym,xm)
 
 	tpos = tposInit()
 
-	Refuel(zm)
+	Refuel(zm+ym+xm)
 
     turtle.select(2)
     tpos.placeMode = true
