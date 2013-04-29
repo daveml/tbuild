@@ -39,6 +39,7 @@ function buildHollow(jQ, tpos, z, x, y)
 		job = {Q_tposMoveRel, {tpos, 0, 0, h}}
 		jobQueue.pushright(jQ, job)
 	end
+	return ((z+1)*(x+1)*(y+1))
 end
 
 function main(zm,ym,xm)
@@ -61,14 +62,16 @@ function main(zm,ym,xm)
 	
 	tposShow(tpos)
 	
-	Refuel(1,math.abs(zm)+math.abs(ym)+math.abs(xm))
     turtle.select(2)
 
    	tpos.placeMode = true
 
 	jQ = jobQueue.new()
 
-	buildHollow(jQ, tpos, zm, xm, ym)
+	fuelReq = buildHollow(jQ, tpos, zm, xm, ym)
+	Refuel(1,fuelReq)
+
+	tposSetPlaceSlot(tpos, 2)
 
 	jobQueue.run(jQ)
 

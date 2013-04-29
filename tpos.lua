@@ -16,6 +16,8 @@ end
 local __LOCK_TABLE = {}
 GLOBAL_lock(__LOCK_TABLE)
 
+local __turtleMaxSlot = 16
+
 function usage()
 
 	print("--tmove v1.0")
@@ -38,7 +40,34 @@ function tposInit()
 	tpos.canBreakOnMove=true
 	tpos.debugPrint=true
 	tpos.placeMode=false
+	tpos.placeSlot=0
+	tpos.placeSlotNext=0
 	return tpos
+end
+
+function tposSetPlaceSlot(tpos, slot)
+	tpos.placeSlot = slot
+	turtle.select(slot)
+	tposFindNextPlaceSlot(tpos)
+end
+
+function tposFindNextPlaceSlot(tpos)
+	for slot=3, __turtleMaxSlot do
+		if turtle.compareTo(slot) then 
+			tpos.placeSlotNext = slot
+			return true 
+		end
+	end
+	tpos.placeSlotNext = 0
+	return false
+end
+
+function tposSetNextPlaceSlot(tpos)
+	if tpos.placeSlotNext == 0 then
+		return false
+	end
+	turtle.select(tpos.placeSlotNext)
+	tposFindNextPlaceSlot(tpos)
 end
 
 function tposPlaceModeEnable(tpos)
@@ -199,9 +228,13 @@ function tposMoveFwd(tpos,count)
 end
 
 function tposPlace(tpos)
-	if turtle.place() == false then 
-		tposPrint("place() failed")
-		return false 
+	if turtle.place() == false then
+	 	tposSetNextPlaceSlot(tpos)
+		if turtle.place() == false then
+			tposPrint("place() failed")
+			return false 
+		end
+		return true
 	end
 	return true
 end
