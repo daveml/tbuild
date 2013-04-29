@@ -331,15 +331,19 @@ function tposMoveZ(tpos, count)
 	if tpos.placeMode == false then
 		if count > 0 then
 			tposSetDir(tpos,1)
+			return tposMoveFwd(tpos, count)
 		else
 			tposSetDir(tpos,3)
+			return tposMoveFwd(tpos, -count)
 		end
 		return tposMoveFwd(tpos, count)
 	else
 		if count > 0 then
 			tposSetDir(tpos,3)
+			return tposMoveBack(tpos, count)
 		else
 			tposSetDir(tpos,1)
+			return tposMoveBack(tpos, -count)
 		end
 		return tposMoveBack(tpos, count)
 	end
@@ -349,17 +353,19 @@ function tposMoveX(tpos, count)
 	if tpos.placeMode == false then
 		if count > 0 then
 			tposSetDir(tpos, 2)
+			return tposMoveFwd(tpos, count)
 		else
 			tposSetDir(tpos, 4)
+			return tposMoveFwd(tpos, -count)
 		end
-		return tposMoveFwd(tpos, count)
 	else
 		if count > 0 then
 			tposSetDir(tpos, 4)
+			return tposMoveBack(tpos, count)
 		else
 			tposSetDir(tpos, 2)
+			return tposMoveBack(tpos, -count)
 		end
-		return tposMoveBack(tpos, count)
 	end	 
 end
 	
