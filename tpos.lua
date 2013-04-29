@@ -339,7 +339,7 @@ function Q_tposMoveRel(params)
 end
 
 function Refuel(count)
-	print("Refueling...")
+	print("Refueling...to travel: ", count, " blocks")
 	local fuelLevel = turtle.getFuelLevel()
 	while fuelLevel < count do
 		if turtle.refuel(1) == false then
