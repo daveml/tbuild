@@ -53,7 +53,7 @@ end
 
 function tposFindNextPlaceSlot(tpos)
 	for slot=3, __turtleMaxSlot do
-		if turtle.compareTo(slot) then 
+ 		if slot ~= tpos.placeSlot and turtle.compareTo(slot) then 
 			tpos.placeSlotNext = slot
 			return true 
 		end
@@ -66,8 +66,7 @@ function tposSetNextPlaceSlot(tpos)
 	if tpos.placeSlotNext == 0 then
 		return false
 	end
-	turtle.select(tpos.placeSlotNext)
-	tposFindNextPlaceSlot(tpos)
+	tposSetPlaceSlot(tpos, tpos.placeSlotNext)
 end
 
 function tposPlaceModeEnable(tpos)
@@ -370,6 +369,7 @@ function ___tposMoveSlideRight(tpos, count)
 end
 
 function tposMoveZ(tpos, count)
+	if count == 0 then return true end
 	if tpos.placeMode == false then
 		if count > 0 then
 			tposSetDir(tpos,1)
@@ -388,6 +388,7 @@ function tposMoveZ(tpos, count)
 end
 
 function tposMoveX(tpos, count)
+	if count == 0 then return true end
 	if tpos.placeMode == false then
 		if count > 0 then
 			tposSetDir(tpos, 2)
@@ -406,6 +407,7 @@ function tposMoveX(tpos, count)
 end
 	
 function tposMoveY(tpos, count)
+	if count == 0 then return true end
 	if count > 0 then
 		return tposMoveUp(tpos, math.abs(count))
 	else

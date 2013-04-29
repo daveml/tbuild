@@ -42,6 +42,12 @@ function buildHollow(jQ, tpos, z, x, y)
 	return ((z+1)*(x+1)*(y+1))
 end
 
+function buildFloor(jQ, tpos, z, x, y)
+
+
+end
+
+
 function main(zm,ym,xm)
 	
 	if zm == nil then
