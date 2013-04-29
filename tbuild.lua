@@ -27,10 +27,10 @@ function buildHollow(jQ, tpos, z, x, y)
 	cx = tpos.x
 	cy = tpos.y
 	
-	for height=1, y do
-		job = {Q_tposMoveRel, {tpos, z, x, height-1}}
+	for height=0, y-1 do
+		job = {Q_tposMoveRel, {tpos, z, x, height}}
 		jobQueue.pushright(jQ, job)
-		job = {Q_tposMoveRel, {tpos, -z, -x, height-1}}
+		job = {Q_tposMoveRel, {tpos, -z, -x, height}}
 		jobQueue.pushright(jQ, job)
 	end
 end
