@@ -186,13 +186,20 @@ function tposMoveFwd(tpos,count)
 	return true
 end
 
+function tposPlace(tpos)
+	if turtle.place() == false then 
+		tposPrint("place() failed")
+		return false 
+	end
+	return true
+end
+
 function tposMoveBack(tpos,count)
 	for i=1, count do
 		if tpos.placeMode == false then
 			if turtle.detect() == false then
 				_tposMoveBack(tpos)
 			elseif tpos.canBreakOnMove and turtle.dig() then
-				tposMoveTurnAround(tpos)
 				tposMoveTurnAround(tpos)
 				_tposMoveBack(tpos)
 			else
@@ -202,12 +209,10 @@ function tposMoveBack(tpos,count)
 		else
 			-- Place Mode
 			if _tposMoveBack(tpos) == false then
-				tposMoveTurnAround(tpos)
 				if turtle.dig() == false then return false end
-				tposMoveTurnAround(tpos)
 				if _tposMoveBack(tpos) == false then return false end
 			end
-			if turtle.place() == false then return false end
+			if tposPlace(tpos) == false then return false end
 		end
 	end
 	return true
@@ -277,7 +282,7 @@ end
 function tposMoveSlideLeft(tpos, count)
 	if count > 0 then
 		if tposTurnLeft(tpos) == false then return false end
-		if tposMoveFwd(tpos,count) == false then return false end
+		if tposMoveFwdw == false then return false end
 		if tposTurnRight(tpos) == false then return false end
 	end
 	return true
@@ -293,19 +298,39 @@ function tposMoveSlideRight(tpos, count)
 end
 
 function tposMoveZ(tpos, count)
-	if count > 0 then
+	if tpos.placeMode == false then
+		if count > 0 then
+			tposSetDir(tpos,1)
+		else
+			tposSetDir(tpos,3)
+		end
 		return tposMoveFwd(tpos, count)
 	else
-		return tposMoveBack(tpos, -count)
+		if count > 0 then
+			tposSetDir(tpos,3)
+		else
+			tposSetDir(tpos,1)
+		end
+		return tposMoveBack(tpos, count)
 	end
 end
 
 function tposMoveX(tpos, count)
-	if count > 0 then
-		return tposMoveSlideRight(tpos, count)
+	if tpos.placeMode == false then
+		if count > 0 then
+			tposSetDir(tpos, 2)
+		else
+			tposSetDir(tpos, 4)
+		end
+		return tposMoveFwd(tpos, count)
 	else
-		return tposMoveSlideLeft(tpos, -count)
- 	end
+		if count > 0 then
+			tposSetDir(tpos, 4)
+		else
+			tposSetDir(tpos, 2)
+		end
+		return tposMoveBack(tpos, count)
+	end	 
 end
 	
 function tposMoveY(tpos, count)
