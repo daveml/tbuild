@@ -25,9 +25,9 @@ end
 function buildHollow(jQ, tpos, z, x, y)
 	for height=1, y do
 		job = {Q_tposMoveRel, {tpos, z, x, height-1}}
+		jobQueue.pushright(jQ, job)
 		job = {Q_tposMoveRel, {tpos, 0, 0, height-1}}
 		jobQueue.pushright(jQ, job)
-		jobQueue.run(jQ)
 	end
 end
 
