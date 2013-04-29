@@ -42,7 +42,7 @@ function tposInit()
 end
 
 function tposShow(tpos)
-	print("tpos: z=",tpos.z, " x=", tpos.x, "y=", tpos.y, "dir=", tpos.dir)
+	print("tpos: z=",tpos.z, " x=", tpos.x, " y=", tpos.y, " dir=", tpos.dir)
 end
 
 function tposPrint(tpos, str)
