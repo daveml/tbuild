@@ -168,8 +168,8 @@ function _tposMoveDown(tpos)
 end
 
 function tposMoveFwd(tpos,count)
-	for i=1, count do
-		if tpos.placeMode == false then
+	if tpos.placeMode == false then
+		for i=1, count do
 			if turtle.detect() == false then
 				_tposMoveFwd(tpos)
 			elseif tpos.canBreakOnMove and turtle.dig() then
@@ -178,13 +178,11 @@ function tposMoveFwd(tpos,count)
 				print("Blocked!")
 				return false
 			end
-		else
-			-- Place Mode
-			tposMoveTurnAround(tpos)
-			tposMoveBack(tpos,count)
-			tposMoveTurnAround(tpos)
 		end
-	end
+	else
+		-- Place Mode
+		tposMoveBack(tpos,count)
+	end		
 	return true
 end
 
