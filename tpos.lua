@@ -41,6 +41,14 @@ function tposInit()
 	return tpos
 end
 
+function tposPlaceModeEnable(tpos)
+	tpos.placeMode = true
+end
+
+function tposPlaceModeDisable(tpos)
+	tpos.placeMode = false
+end
+
 function tposShow(tpos)
 	print("tpos: z=",tpos.z, " x=", tpos.x, " y=", tpos.y, " dir=", tpos.dir)
 end
@@ -50,7 +58,6 @@ function tposPrint(tpos, str)
 		print(str)
 	end
 end
-
 
 function tposIncZX_get(tpos)
 	if tpos.dir == 1 then

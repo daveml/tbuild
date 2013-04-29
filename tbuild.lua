@@ -22,6 +22,13 @@ function clearBlock()
 	turtle.turnLeft()
 end
 
+function buildHollow(jQ, tpos, z, x, y)
+	for height=1, y do
+		job = {Q_tposMoveRel, {tpos, 0, 0, height-1}}
+		jobQueue.pushright(jQ, job)
+		jobQueue.run(jQ)
+	end
+end
 
 function main(zm,ym,xm)
 	
@@ -48,13 +55,10 @@ function main(zm,ym,xm)
 
    	tpos.placeMode = true
 
---	buildLine(zm)
-
 	jQ = jobQueue.new()
-	job = {Q_tposMoveAbs, {tpos, zm, xm, ym}}
-	jobQueue.pushright(jQ, job)
-	job = {Q_tposMoveAbs, {tpos, 0, 0, ym}}
-	jobQueue.pushright(jQ, job)
+
+	buildHollow(jQ, tpos, zm, xm, ym)
+
 	jobQueue.run(jQ)
 
 	tposShow(tpos)
