@@ -279,7 +279,7 @@ function tposSetDir(tpos, dir)
 	end
 end
 
-function tposMoveSlideLeft(tpos, count)
+function ___tposMoveSlideLeft(tpos, count)
 	if count > 0 then
 		if tposTurnLeft(tpos) == false then return false end
 		if tposMoveFwdw == false then return false end
@@ -288,7 +288,7 @@ function tposMoveSlideLeft(tpos, count)
 	return true
 end
 
-function tposMoveSlideRight(tpos, count)
+function ___tposMoveSlideRight(tpos, count)
 	if count > 0 then
 		if tposTurnRight(tpos) == false then return false end
 		if tposMoveFwd(tpos,count) == false then return false end
@@ -363,8 +363,10 @@ function Q_tposMoveRel(params)
 	tposMoveRel(parans[1],params[2],params[3],params[4])
 end
 
-function Refuel(count)
+function Refuel(slot,count)
 	print("Refueling...to travel: ", count, " blocks")
+    print("  using slot: ", slot)
+    turtle.select(1)
 	local fuelLevel = turtle.getFuelLevel()
 	while fuelLevel < count do
 		if turtle.refuel(1) == false then

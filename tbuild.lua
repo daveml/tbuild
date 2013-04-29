@@ -39,9 +39,9 @@ function main(zm,ym,xm)
 
 	tpos = tposInit()
 
-	Refuel(math.abs(zm)+math.abs(ym)+math.abs(xm))
-
+	Refuel(1,math.abs(zm)+math.abs(ym)+math.abs(xm))
     turtle.select(2)
+
     tpos.placeMode = true
 --	buildLine(zm)
 
