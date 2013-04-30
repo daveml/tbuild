@@ -99,9 +99,9 @@ function main(zm,ym,xm)
 
 	jQ = jobQueue.new()
 
-	fuelReq1 = buildFill(jQ, myTpos, zm, xm, 1)
+	fuelReq1 = buildZFill(jQ, myTpos, zm, xm, 1)
 	fuelReq2 = buildYHollow(jQ, myTpos, zm, xm, ym)
-	fuelReq3 = buildFill(jQ, myTpos, zm, xm, 1)
+	fuelReq3 = buildZFill(jQ, myTpos, zm, xm, 1)
 	Refuel(1,fuelReq1+fuelReq2+fuelReq3)
 
 	tposSetPlaceSlot(myTpos, 2)
