@@ -48,6 +48,7 @@ function tposInit()
 end
 
 function tposSavePosition(tpos, Index)
+	assert(Index ~= nil, "tpos.error: Index=nil on SavePosition")
 	if tpos.PosMemory[Index] ~= nil then
 		tpos.PosMemory[Index] = nil
 	end
