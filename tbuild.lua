@@ -67,6 +67,7 @@ function buildZFill(jQ, tpos, z, x, y)
 end
 
 function buildReturn(jQ, tpos, CanBreak)
+	jobQueue.pushright(jQ, {Q_tposPlaceModeDisable, {tpos}})
 	if CanBreak == false then
 		jobQueue.pushright(jQ, {Q_tposBreakOnMoveDisable, {tpos}} )
 	end
