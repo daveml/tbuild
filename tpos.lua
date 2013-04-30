@@ -465,11 +465,11 @@ function tposMoveRel(tpos,z,x,y)
 	return true
 end
 
-function Q_tposMoveAbs(list, params)
+function Q_tposMoveAbs(params)
 	tposMoveAbs(params[1],params[2],params[3],params[4])
 end
 
-function Q_tposMoveRel(list, params)
+function Q_tposMoveRel(params)
 	tposMoveRel(params[1],params[2],params[3],params[4])
 end
 
@@ -532,7 +532,7 @@ function jobQueue.run (list)
 		if job == nil then
 			return true
 		end
-		if job[1](list, job[2]) == false then
+		if job[1](job[2]) == false then
 			return false
 		end
 	end
