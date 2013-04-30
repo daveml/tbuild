@@ -415,26 +415,62 @@ function tposMoveY(tpos, count)
 	end
 end
 
+function tposCheckPosZ(tpos, ExpectedZ)
+	if tpos.z == ExpectedZ then
+		return true
+	else
+		return false
+	end
+end
+
+function tposCheckPosX(tpos, ExpectedX)
+	if tpos.x == ExpectedX then
+		return true
+	else
+		return false
+	end
+end
+
+function tposCheckPosY(tpos, ExpectedY)
+	if tpos.y == ExpectedY then
+		return true
+	else
+		return false
+	end
+end
+
+function tposPerformMovement(tpos, MoveF, CheckF, str, curpos, nextpos)
+	MoveF(tpos, nextpos-curpos)
+	if CheckF(nextpos) == false then
+		print("Move", str, " failed: check fuel, inventory, clear obstacles")
+		print("press [enter] to continue")
+		read()
+		return false
+	else
+		return true
+	end		
+end
+
 function tposMoveAbs(tpos,z,x,y)
-	if tposMoveZ(tpos, z - tpos.z) == false then return false end
-	if tposMoveX(tpos, x - tpos.x) == false then return false end
-	if tposMoveY(tpos, y - tpos.y) == false then return false end
+	while tposPerformMovement(tpos, tposMoveZ, "Z", tpoz.z, z) == false do end
+	while tposPerformMovement(tpos, tposMoveX, "X", tpoz.x, x) == false do end
+	while tposPerformMovement(tpos, tposMoveX, "Y", tpoz.y, y) == false do end
 	return true
 end
 
 function tposMoveRel(tpos,z,x,y)
-	if tposMoveZ(tpos, z) == false then return false end
-	if tposMoveX(tpos, x) == false then return false end
-	if tposMoveY(tpos, y) == false then return false end
+	while tposPerformMovement(tpos, tposMoveZ, "Z", tpoz.z, tpos.z+z) == false do end
+	while tposPerformMovement(tpos, tposMoveX, "X", tpoz.x, tpos.x+x) == false do end
+	while tposPerformMovement(tpos, tposMoveX, "Y", tpoz.y, tpos.y+y) == false do end
 	return true
 end
 
 function Q_tposMoveAbs(params)
-	tposMoveAbs(params[1],params[2],params[3],params[4])
+	tposMoveAbs(params[2],params[3],params[4],params[5])
 end
 
 function Q_tposMoveRel(params)
-	tposMoveRel(params[1],params[2],params[3],params[4])
+	tposMoveRel(params[2],params[3],params[4],params[5])
 end
 
 function Refuel(slot,count)
@@ -496,7 +532,7 @@ function jobQueue.run (list)
 		if job == nil then
 			return true
 		end
-		if job[1](job[2]) == false then
+		if job[1](list, job[2]) == false then
 			return false
 		end
 	end

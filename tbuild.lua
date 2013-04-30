@@ -1,5 +1,6 @@
 -- tbuild
-local tposLib = assert(loadfile('/rom/apis/tpos'))
+--local tposLib = assert(loadfile('/rom/apis/tpos'))
+local tposLib = assert(loadfile('/downloads/tbuild/tpos.lua'))
 tposLib()
 
 local args = {...}
