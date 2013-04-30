@@ -469,7 +469,7 @@ function Q_tposMoveAbs(list, params)
 	tposMoveAbs(params[1],params[2],params[3],params[4])
 end
 
-function Q_tposMoveRel(params)
+function Q_tposMoveRel(list, params)
 	tposMoveRel(params[1],params[2],params[3],params[4])
 end
 
