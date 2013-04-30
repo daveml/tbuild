@@ -23,7 +23,7 @@ function clearBlock()
 	turtle.turnLeft()
 end
 
-function buildHollow(jQ, tpos, z, x, y)
+function buildYHollow(jQ, tpos, z, x, y)
 	cz = tpos.z
 	cx = tpos.x
 	cy = tpos.y
@@ -40,12 +40,32 @@ function buildHollow(jQ, tpos, z, x, y)
 		job = {Q_tposMoveRel, {tpos, 0, 0, h}}
 		jobQueue.pushright(jQ, job)
 	end
-	return ((z+1)*(x+1)*(y+1))
+	return ((z+1)*(x+1)*(y))
 end
 
-function buildFloor(jQ, tpos, z, x, y)
-
-
+function buildFill(jQ, tpos, z, x, y)
+	cz = tpos.z
+	cx = tpos.x
+	cy = tpos.y
+	if y < 0 then
+		y = -y
+		h=-1
+	end
+	for height=y-1 to y do
+		for width=0, x-1 do
+			job = {Q_tposMoveRel, {tpos, z, 0, height}}
+			jobQueue.pushright(jQ, job)
+			job = {Q_tposMoveRel, {tpos, 0, 1, height}}
+			jobQueue.pushright(jQ, job)
+			job = {Q_tposMoveRel, {tpos, 0, -z, height}}
+			jobQueue.pushright(jQ, job)
+			job = {Q_tposMoveRel, {tpos, 0, 1, height}}
+			jobQueue.pushright(jQ, job)
+		end
+	end
+	job = {Q_tposMoveAbs, {tpos, cz, cx, cy}}
+	jobQueue.pushright(jQ, job)
+	return ((z+1)*(x+1)*(y)+(x+1))
 end
 
 
@@ -75,8 +95,10 @@ function main(zm,ym,xm)
 
 	jQ = jobQueue.new()
 
-	fuelReq = buildHollow(jQ, myTpos, zm, xm, ym)
-	Refuel(1,fuelReq)
+	fuelReq1 = buildFill(jQ, myTpos, zm, xm, 1)
+	fuelReq2 = buildYHollow(jQ, myTpos, zm, xm, ym)
+	fuelReq3 = buildFill(jQ, myTpos, zm, xm, 1)
+	Refuel(1,fuelReq1+fuelReq2+fuelReq3)
 
 	tposSetPlaceSlot(myTpos, 2)
 
