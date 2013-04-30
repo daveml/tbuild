@@ -32,6 +32,7 @@ function usage()
 end
 
 function tposInit()
+	tposPrint("tposInit")
 	tpos = {}
 	tpos.z=0
 	tpos.y=0
@@ -452,6 +453,7 @@ function tposPerformMovement(tpos, MoveF, CheckF, str, curpos, nextpos)
 end
 
 function tposMoveAbs(tpos,z,x,y)
+	tposShow(tpos)
 	while tposPerformMovement(tpos, tposMoveZ, "Z", tpos.z, z) == false do end
 	while tposPerformMovement(tpos, tposMoveX, "X", tpos.x, x) == false do end
 	while tposPerformMovement(tpos, tposMoveX, "Y", tpos.y, y) == false do end
@@ -459,6 +461,7 @@ function tposMoveAbs(tpos,z,x,y)
 end
 
 function tposMoveRel(tpos,z,x,y)
+	tposShow(tpos)
 	while tposPerformMovement(tpos, tposMoveZ, "Z", tpos.z, tpos.z+z) == false do end
 	while tposPerformMovement(tpos, tposMoveX, "X", tpos.x, tpos.x+x) == false do end
 	while tposPerformMovement(tpos, tposMoveX, "Y", tpos.y, tpos.y+y) == false do end
