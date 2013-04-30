@@ -78,6 +78,14 @@ function tposPlaceModeDisable(tpos)
 	tpos.placeMode = false
 end
 
+function tposBreakOnMoveDisable(tpos)
+	tpos.canBreakOnMove = false
+end
+
+function tposBreakOnMoveEnable(tpos)
+	tpos.canBreakOnMove = true
+end
+	
 function tposShow(tpos)
 	print("tpos: z=",tpos.z, " x=", tpos.x, " y=", tpos.y, " dir=", tpos.dir)
 end
@@ -369,6 +377,10 @@ function ___tposMoveSlideRight(tpos, count)
 	return true
 end
 
+function tposGetDistance(tpos, z,x,y)
+	return = math.abs(tpos.z - z) + math.abs(tpos.x - x) + math.abs(tpos.y - y)
+end
+
 function tposMoveZ(tpos, count)
 	tposPrint(tpos, "MoveZ: ", count)
 	if count == 0 then return true end
@@ -480,6 +492,22 @@ end
 
 function Q_tposMoveRel(params)
 	tposMoveRel(params[1],params[2],params[3],params[4])
+end
+
+function Q_tposPlaceModeEnable(params)
+	tposPlaceModeEnable(params[1])
+end
+
+function Q_tposPlaceModeDisable(params)
+	tposPlaceModeDisable(params[1])
+end
+
+function Q_tposBreakOnMoveEnable(params)
+	tposBreakOnMoveEnable(params[1])
+end
+
+function Q_tposBreakOnMoveDisable(params)
+	tposBreakOnMoveDisable(params[1])
 end
 
 function Refuel(slot,count)
