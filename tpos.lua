@@ -609,7 +609,7 @@ function jobQueue.run (list)
 			return true
 		end
 		print(type(job[1]))
-		if type(job[1] ~= "function" then
+		if type(job[1]) ~= "function" then
 			print("tpos.error - no Q_fcn: ", job[1])
 		end
 		
