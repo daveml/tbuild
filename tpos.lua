@@ -609,7 +609,7 @@ function jobQueue.run (list)
 			return true
 		end
 		
-		if job[1].debug.getinfo(1, "n").name == nil then
+		if job[1].debug == nil then
 			print("tpos.error - no Q_fcn: ", job[1])
 		end
 		
