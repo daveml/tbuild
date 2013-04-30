@@ -49,7 +49,7 @@ function buildZFill(jQ, tpos, z, x, y)
 	cy = tpos.y
 	if y < 0 then
 		y = -y
-		h=-1
+		local h=-1
 	end
 	local dir = 1
 	for height=1, y do
