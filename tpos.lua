@@ -465,12 +465,12 @@ function tposMoveRel(tpos,z,x,y)
 	return true
 end
 
-function Q_tposMoveAbs(params)
-	tposMoveAbs(params[2],params[3],params[4],params[5])
+function Q_tposMoveAbs(list, params)
+	tposMoveAbs(params[1],params[2],params[3],params[4])
 end
 
 function Q_tposMoveRel(params)
-	tposMoveRel(params[2],params[3],params[4],params[5])
+	tposMoveRel(params[1],params[2],params[3],params[4])
 end
 
 function Refuel(slot,count)
