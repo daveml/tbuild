@@ -377,9 +377,9 @@ function ___tposMoveSlideRight(tpos, count)
 	return true
 end
 
-function tposGetDistance(tpos, z,x,y)
-	return = math.abs(tpos.z - z) + math.abs(tpos.x - x) + math.abs(tpos.y - y)
-end
+--function tposGetDistance(tpos, z,x,y)
+--	return = math.abs(tpos.z - z) + math.abs(tpos.x - x) + math.abs(tpos.y - y)
+--end
 
 function tposMoveZ(tpos, count)
 	tposPrint(tpos, "MoveZ: ", count)
