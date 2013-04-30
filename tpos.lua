@@ -370,6 +370,7 @@ function ___tposMoveSlideRight(tpos, count)
 end
 
 function tposMoveZ(tpos, count)
+	tposPrint(tpos, "MoveZ: ", count)
 	if count == 0 then return true end
 	if tpos.placeMode == false then
 		if count > 0 then
@@ -389,6 +390,7 @@ function tposMoveZ(tpos, count)
 end
 
 function tposMoveX(tpos, count)
+	tposPrint(tpos, "MoveX: ", count)
 	if count == 0 then return true end
 	if tpos.placeMode == false then
 		if count > 0 then
@@ -408,6 +410,7 @@ function tposMoveX(tpos, count)
 end
 	
 function tposMoveY(tpos, count)
+	tposPrint(tpos, "MoveY: ", count)
 	if count == 0 then return true end
 	if count > 0 then
 		return tposMoveUp(tpos, math.abs(count))
