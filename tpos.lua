@@ -56,7 +56,7 @@ function tposSavePosition(tpos, Index)
 end
 
 function tposRecallPosition(tpos, Idx)
-	ASSERT(tpos.PosMemory[Index] ~= nil,
+	assert(tpos.PosMemory[Index] ~= nil,
 		"tpos.error - You Indexed an invalid PosMemory location: "..Idx)
 	return tpos.PosMemory[Idx]
 end
