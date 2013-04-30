@@ -74,7 +74,7 @@ function buildZFill(jQ, tpos, z, x, y)
 	job = {Q_tposPlaceModeEnable, {tpos}}
 	jobQueue.pushright(jQ, job)
 --	return ((z+1)*(x+1)*(y)+(x+1) + tposGetDistance(tpos,cz,cx,cy+1))
-	return ((z+1)*(x+1)*(y)+(x+1)
+	return ((z+1)*(x+1)*(y)+(x+1))
 end
 
 function buildReturn(jQ, tpos, CanBreak)
