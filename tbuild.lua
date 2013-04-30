@@ -71,7 +71,7 @@ function main(zm,ym,xm)
 	
  	tposSetPlaceSlot(myTpos,2)
 
-   	tpos.placeMode = true
+   	myTpos.placeMode = true
 
 	jQ = jobQueue.new()
 
