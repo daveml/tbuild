@@ -68,11 +68,11 @@ end
 
 function buildReturn(jQ, tpos, CanBreak)
 	if CanBreak == false then
-		jobQueue.pushright(jQ, {Q_tposBreanOnMoveDisable, {tpos}} )
+		jobQueue.pushright(jQ, {Q_tposBreakOnMoveDisable, {tpos}} )
 	end
 	jobQueue.pushright(jQ, {Q_tposMoveAbs, {tpos, 0, 0, 0}} )
 	if CanBreak == false then
-		jobQueue.pushright(jQ, {Q_tposBreanOnMoveEnable, {tpos}} )
+		jobQueue.pushright(jQ, {Q_tposBreakOnMoveEnable, {tpos}} )
 	end
 --	return tposGetDistance(tpos,0,0,0)
 end
