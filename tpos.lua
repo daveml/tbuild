@@ -452,16 +452,16 @@ function tposPerformMovement(tpos, MoveF, CheckF, str, curpos, nextpos)
 end
 
 function tposMoveAbs(tpos,z,x,y)
-	while tposPerformMovement(tpos, tposMoveZ, "Z", tpoz.z, z) == false do end
-	while tposPerformMovement(tpos, tposMoveX, "X", tpoz.x, x) == false do end
-	while tposPerformMovement(tpos, tposMoveX, "Y", tpoz.y, y) == false do end
+	while tposPerformMovement(tpos, tposMoveZ, "Z", tpos.z, z) == false do end
+	while tposPerformMovement(tpos, tposMoveX, "X", tpos.x, x) == false do end
+	while tposPerformMovement(tpos, tposMoveX, "Y", tpos.y, y) == false do end
 	return true
 end
 
 function tposMoveRel(tpos,z,x,y)
-	while tposPerformMovement(tpos, tposMoveZ, "Z", tpoz.z, tpos.z+z) == false do end
-	while tposPerformMovement(tpos, tposMoveX, "X", tpoz.x, tpos.x+x) == false do end
-	while tposPerformMovement(tpos, tposMoveX, "Y", tpoz.y, tpos.y+y) == false do end
+	while tposPerformMovement(tpos, tposMoveZ, "Z", tpos.z, tpos.z+z) == false do end
+	while tposPerformMovement(tpos, tposMoveX, "X", tpos.x, tpos.x+x) == false do end
+	while tposPerformMovement(tpos, tposMoveX, "Y", tpos.y, tpos.y+y) == false do end
 	return true
 end
 
