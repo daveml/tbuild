@@ -56,10 +56,8 @@ function tposSavePosition(tpos, Index)
 end
 
 function tposRecallPosition(tpos, Idx)
-	if tpos.PosMemory[Index] == nil then
-		print("tpos.error - You Indexed an invalid PosMemory location: ", Idx)
-		exit(0)
-	end
+	ASSERT(tpos.PosMemory[Index] ~= nil,
+		"tpos.error - You Indexed an invalid PosMemory location: "..Idx)
 	return tpos.PosMemory[Idx]
 end
 
@@ -399,7 +397,6 @@ end
 --end
 
 function tposMoveZ(tpos, count)
-	tposPrint(tpos, "MoveZ: ", count)
 	if count == 0 then return true end
 	if tpos.placeMode == false then
 		if count > 0 then
@@ -419,7 +416,6 @@ function tposMoveZ(tpos, count)
 end
 
 function tposMoveX(tpos, count)
-	tposPrint(tpos, "MoveX: ", count)
 	if count == 0 then return true end
 	if tpos.placeMode == false then
 		if count > 0 then
@@ -439,7 +435,6 @@ function tposMoveX(tpos, count)
 end
 	
 function tposMoveY(tpos, count)
-	tposPrint(tpos, "MoveY: ", count)
 	if count == 0 then return true end
 	if count > 0 then
 		return tposMoveUp(tpos, math.abs(count))
@@ -608,7 +603,6 @@ function jobQueue.run (list)
 		if job == nil then
 			return true
 		end
-		print(type(job[1]))
 		if type(job[1]) ~= "function" then
 			print("tpos.error - no Q_fcn: ", job[1])
 		end
