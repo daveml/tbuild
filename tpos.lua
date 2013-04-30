@@ -604,9 +604,8 @@ function jobQueue.run (list)
 		if job == nil then
 			return true
 		end
-		assert(type(job[1]) == "function"),
+		assert(type(job[1]) == "function",
 			"tpos.error - no Q_fcn: "..job[1])
-		end
 		
 		if job[1](job[2]) == false then
 			return false
