@@ -44,17 +44,21 @@ function tposInit()
 	tpos.placeSlot=0
 	tpos.placeSlotNext=0
 	tpos.PosMemory = {}
-	tpos.PosMemIdx = 1
 	return tpos
 end
 
-function tposSavePosition(tpos)
-	tpos.PosMemory[tpos.PosMemIdx] = {z=tpos.z, x=tpos.x, y=tpos.y}
-	tpos.PosMemIdx = tpos.PosMemIdx + 1
-	return (tpos.PosMemIdx - 1)
+function tposSavePosition(tpos, Index)
+	if tpos.PosMemory[Index] != nil then
+		tpos.PosMemory[Index] = nil
+	end
+	tpos.PosMemory[Index] = {z=tpos.z, x=tpos.x, y=tpos.y}
+	return
 end
 
 function tposRecallPosition(tpos, Idx)
+	if tpos.PosMemory[Index] == nil then
+		print("tpos.error - You Indexed an invalid PosMemory location: ", Idx)
+		exit(0)
 	return tpos.PosMemory[Idx]
 end
 
