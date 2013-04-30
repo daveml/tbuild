@@ -538,7 +538,7 @@ function Q_tposBreakOnMoveDisable(params)
 end
 
 function Q_tposSavePosition(params)
-	return tposSavePosition(params[1])
+	return tposSavePosition(params[1],params[2])
 end
 
 function Q_tposRecallMoveAbs(params)
