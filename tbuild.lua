@@ -124,7 +124,7 @@ function main(zm,ym,xm)
 	fuelReq2 = buildZFill(jQ, myTpos, zm, xm, 1)
 	fuelReq3 = buildYHollow(jQ, myTpos, zm, xm, ym)
 	fuelReq4 = buildZFill(jQ, myTpos, zm, xm, 1)
-	fuelReq5 = buldReturn(jQ, myTpos)
+	fuelReq5 = buildReturn(jQ, myTpos)
 
 	if Refuel(1,fuelReq1+fuelReq2+fuelReq3+fuelReq4) == false then
 		exit(0)
