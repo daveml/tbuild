@@ -443,6 +443,8 @@ end
 function tposPerformMovement(tpos, MoveF, CheckF, str, curpos, nextpos)
 	MoveF(tpos, nextpos-curpos)
 	if CheckF(tpos, nextpos) == false then
+		tposShow(tpos)
+		print("nextpos=",nextpos, " curpos=", curpos)
 		print("Move", str, " failed: check fuel, inventory, clear obstacles")
 		print("press [enter] to continue")
 		read()
