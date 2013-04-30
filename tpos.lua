@@ -33,7 +33,7 @@ end
 
 function tposInit()
 	tposPrint("tposInit")
-	tpos = {}
+	local tpos = {}
 	tpos.z=0
 	tpos.y=0
 	tpos.x=0

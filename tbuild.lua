@@ -63,26 +63,26 @@ function main(zm,ym,xm)
 		xm = 0
 	end
 
-    if tpos == nil then
-		tpos = tposInit()
+    if myTpos == nil then
+		myTpos = tposInit()
 	end
 	
-	tposShow(tpos)
+	tposShow(myTpos)
 	
- 	tposSetPlaceSlot(tpos,2)
+ 	tposSetPlaceSlot(myTpos,2)
 
    	tpos.placeMode = true
 
 	jQ = jobQueue.new()
 
-	fuelReq = buildHollow(jQ, tpos, zm, xm, ym)
+	fuelReq = buildHollow(jQ, myTpos, zm, xm, ym)
 	Refuel(1,fuelReq)
 
-	tposSetPlaceSlot(tpos, 2)
+	tposSetPlaceSlot(myTpos, 2)
 
 	jobQueue.run(jQ)
 
-	tposShow(tpos)
+	tposShow(myTpos)
 
 end
 
