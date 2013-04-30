@@ -89,7 +89,7 @@ function buildReturn(jQ, tpos, CanBreak)
 end
 
 function buildBegin(jQ, tpos)
-	jobQueue.pushright(jQ, {Q_tposBreanOnMoveEnable, {tpos}} )
+	jobQueue.pushright(jQ, {Q_tposBreakOnMoveEnable, {tpos}} )
 	jobQueue.pushright(jQ, {Q_tposPlaceModeDisable, {tpos}} )
 	jobQueue.pushright(jQ, {Q_tposMoveRel, {tpos, 1, 0, 0}} )
 	jobQueue.pushright(jQ, {Q_tposPlaceModeEnable, {tpos}} )
