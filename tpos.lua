@@ -489,13 +489,13 @@ function tposMoveAbs(tpos,z,x,y)
 end
 
 function tposRecallMoveAbs(tpos, MemIdx)
-	{z,x,y} = tposRecallPosition(tpos, MemIdx)
-	tposMoveAbs(tpos,z,x,y)
+	pos = tposRecallPosition(tpos, MemIdx)
+	tposMoveAbs(tpos,pos.z,pos.x,pos.y)
 end
 
 function tposRecallMoveRel(tpos, MemIdx, z,x,y)
-	{lz,lx,ly} = tposRecallPosition(tpos, MemIdx)
-	tposMoveAbs(tpos,lz+z,lx+x,ly+y)
+	lpos = tposRecallPosition(tpos, MemIdx)
+	tposMoveAbs(tpos,lpos.z+z,lpos.x+x,lpos.y+y)
 end
 
 function tposMoveRel(tpos,z,x,y)
