@@ -608,8 +608,8 @@ function jobQueue.run (list)
 		if job == nil then
 			return true
 		end
-		
-		if job[1].debug == nil then
+		print(type(job[1]))
+		if type(job[1] ~= "function" then
 			print("tpos.error - no Q_fcn: ", job[1])
 		end
 		
