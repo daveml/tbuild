@@ -455,15 +455,17 @@ end
 function tposMoveAbs(tpos,z,x,y)
 	while tposPerformMovement(tpos, tposMoveZ, tposCheckPosZ, "Z", tpos.z, z) == false do end
 	while tposPerformMovement(tpos, tposMoveX, tposCheckPosX, "X", tpos.x, x) == false do end
-	while tposPerformMovement(tpos, tposMoveX, tposCheckPosY, "Y", tpos.y, y) == false do end
+	while tposPerformMovement(tpos, tposMoveY, tposCheckPosY, "Y", tpos.y, y) == false do end
 	return true
 end
 
 function tposMoveRel(tpos,z,x,y)
-	tposShow(tpos)
-	while tposPerformMovement(tpos, tposMoveZ, tposCheckPosZ, "Z", tpos.z, tpos.z+z) == false do end
-	while tposPerformMovement(tpos, tposMoveX, tposCheckPosX, "X", tpos.x, tpos.x+x) == false do end
-	while tposPerformMovement(tpos, tposMoveX, tposCheckPosY, "Y", tpos.y, tpos.y+y) == false do end
+	local nextz = tpos.z+z
+	local nextx = tpos.x+x
+	local nexty = tpos.y+y
+	while tposPerformMovement(tpos, tposMoveZ, tposCheckPosZ, "Z", tpos.z, nextz) == false do end
+	while tposPerformMovement(tpos, tposMoveX, tposCheckPosX, "X", tpos.x, nextx) == false do end
+	while tposPerformMovement(tpos, tposMoveY, tposCheckPosY, "Y", tpos.y, nexty) == false do end
 	return true
 end
 
