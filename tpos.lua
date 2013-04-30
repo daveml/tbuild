@@ -43,7 +43,19 @@ function tposInit()
 	tpos.placeMode=false
 	tpos.placeSlot=0
 	tpos.placeSlotNext=0
+	tpos.PosMemory = {}
+	tpos.PosMemIdx = 1
 	return tpos
+end
+
+function tposSavePosition(tpos)
+	tpos.PosMemory[tpos.PosMemIdx] = {z=tpos.z, x=tpos.x, y=tpos.y}
+	tpos.PosMemIdx = tpos.PosMemIdx + 1
+	return (tpos.PosMemIdx - 1)
+end
+
+function tposRecallPosition(tpos, Idx)
+	return tpos.PosMemory[Idx]
 end
 
 function tposSetPlaceSlot(tpos, slot)
@@ -476,6 +488,16 @@ function tposMoveAbs(tpos,z,x,y)
 	return true
 end
 
+function tposRecallMoveAbs(tpos, MemIdx)
+	{z,x,y} = tposRecallPosition(tpos, MemIdx)
+	tposMoveAbs(tpos,z,x,y)
+end
+
+function tposRecallMoveRel(tpos, MemIdx, z,x,y)
+	{lz,lx,ly} = tposRecallPosition(tpos, MemIdx)
+	tposMoveAbs(tpos,lz+z,lx+x,ly+y)
+end
+
 function tposMoveRel(tpos,z,x,y)
 	local nextz = tpos.z+z
 	local nextx = tpos.x+x
@@ -508,6 +530,18 @@ end
 
 function Q_tposBreakOnMoveDisable(params)
 	tposBreakOnMoveDisable(params[1])
+end
+
+function Q_tposSavePosition(params)
+	return tposSavePosition(params[1])
+end
+
+function Q_tposRecallMoveAbs(params)
+	return tposRecallMoveAbs(params[1], params[2])
+end
+
+function Q_tposRecallMoveRel(params)
+	return tposRecallMoveRel(params[1], params[2], params[3], params[4], params[5])
 end
 
 function Refuel(slot,count)

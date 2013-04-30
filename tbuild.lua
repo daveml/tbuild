@@ -33,31 +33,24 @@ function buildYHollow(jQ, tpos, z, x, y)
 		h=-1
 	end
 	for height=1, y do
-		job = {Q_tposMoveRel, {tpos, z, x, 0}}
-		jobQueue.pushright(jQ, job)
-		job = {Q_tposMoveRel, {tpos, -z, -x, 0}}
-		jobQueue.pushright(jQ, job)
-		job = {Q_tposMoveRel, {tpos, 0, 0, h}}
-		jobQueue.pushright(jQ, job)
+		jobQueue.pushright(jQ, {Q_tposMoveRel, {tpos, z, x, 0}})
+		jobQueue.pushright(jQ, {Q_tposMoveRel, {tpos, -z, -x, 0}})
+		jobQueue.pushright(jQ, {Q_tposMoveRel, {tpos, 0, 0, h}})
 	end
 	return ((z+1)*(x+1)*(y))
 end
 
 function buildZFill(jQ, tpos, z, x, y)
-	cz = tpos.z
-	cx = tpos.x
-	cy = tpos.y
+	jobQueue.pushright(jQ, { Q_tposSavePosition, {tpos, 1}})
 	if y < 0 then
 		y = -y
 		local h=-1
 	end
 	local dir = 1
 	for height=1, y do
-		for width=1, x do
-			job = {Q_tposMoveRel, {tpos, z*dir, 0, height-1}}
-			jobQueue.pushright(jQ, job)
-			job = {Q_tposMoveRel, {tpos, 0, 1, height-1}}
-			jobQueue.pushright(jQ, job)
+		for width=1, x+1 do
+			jobQueue.pushright(jQ, {Q_tposMoveRel, {tpos, z*dir, 0, height-1}})
+			jobQueue.pushright(jQ, {Q_tposMoveRel, {tpos, 0, 1, height-1}})
 			if dir==1 then 
 				dir = -1 
 			else
@@ -65,14 +58,10 @@ function buildZFill(jQ, tpos, z, x, y)
 			end
 		end
 	end
-	job = {Q_tposPlaceModeDisable, {tpos}}
-	jobQueue.pushright(jQ, job)
-	job = {Q_tposMoveRel, {tpos, 0, 0, 1}}
-	jobQueue.pushright(jQ, job)
-	job = {Q_tposMoveAbs, {tpos, cz, cx, cy+1}}
-	jobQueue.pushright(jQ, job)
-	job = {Q_tposPlaceModeEnable, {tpos}}
-	jobQueue.pushright(jQ, job)
+	jobQueue.pushright(jQ, {Q_tposPlaceModeDisable, {tpos}})
+	jobQueue.pushright(jQ, {Q_tposMoveRel, {tpos, 0, 0, 1}})
+	jobQueue.pushright(jQ, {Q_tposRecallMoveRel, {tpos, 1, 0,0,1}})
+	jobQueue.pushright(jQ, {Q_tposPlaceModeEnable, {tpos}})
 --	return ((z+1)*(x+1)*(y)+(x+1) + tposGetDistance(tpos,cz,cx,cy+1))
 	return ((z+1)*(x+1)*(y)+(x+1))
 end
