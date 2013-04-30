@@ -43,7 +43,7 @@ function buildYHollow(jQ, tpos, z, x, y)
 	return ((z+1)*(x+1)*(y))
 end
 
-function buildFill(jQ, tpos, z, x, y)
+function buildZFill(jQ, tpos, z, x, y)
 	cz = tpos.z
 	cx = tpos.x
 	cy = tpos.y
@@ -51,16 +51,18 @@ function buildFill(jQ, tpos, z, x, y)
 		y = -y
 		h=-1
 	end
+	local dir = 1
 	for height=1, y do
 		for width=1, x do
-			job = {Q_tposMoveRel, {tpos, z, 0, height-1}}
+			job = {Q_tposMoveRel, {tpos, z*dir, 0, height-1}}
 			jobQueue.pushright(jQ, job)
 			job = {Q_tposMoveRel, {tpos, 0, 1, height-1}}
 			jobQueue.pushright(jQ, job)
-			job = {Q_tposMoveRel, {tpos, -z, 0, height-1}}
-			jobQueue.pushright(jQ, job)
-			job = {Q_tposMoveRel, {tpos, 0, 1, height-1}}
-			jobQueue.pushright(jQ, job)
+			if dir==1 then 
+				dir = -1 
+			else
+				dir = 1
+			end
 		end
 	end
 	job = {Q_tposMoveRel, {tpos, 0, 0, 1}}
