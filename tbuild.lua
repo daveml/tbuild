@@ -51,7 +51,7 @@ function buildFill(jQ, tpos, z, x, y)
 		y = -y
 		h=-1
 	end
-	for height=y-1 to y do
+	for height=y-1, y do
 		for width=0, x-1 do
 			job = {Q_tposMoveRel, {tpos, z, 0, height}}
 			jobQueue.pushright(jQ, job)
