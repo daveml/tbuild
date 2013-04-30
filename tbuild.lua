@@ -51,19 +51,21 @@ function buildFill(jQ, tpos, z, x, y)
 		y = -y
 		h=-1
 	end
-	for height=y-1, y do
+	for height=1, y do
 		for width=0, x-1 do
-			job = {Q_tposMoveRel, {tpos, z, 0, height}}
+			job = {Q_tposMoveRel, {tpos, z, 0, height-1}}
 			jobQueue.pushright(jQ, job)
-			job = {Q_tposMoveRel, {tpos, 0, 1, height}}
+			job = {Q_tposMoveRel, {tpos, 0, 1, height-1}}
 			jobQueue.pushright(jQ, job)
-			job = {Q_tposMoveRel, {tpos, -z, 0, height}}
+			job = {Q_tposMoveRel, {tpos, -z, 0, height-1}}
 			jobQueue.pushright(jQ, job)
-			job = {Q_tposMoveRel, {tpos, 0, 1, height}}
+			job = {Q_tposMoveRel, {tpos, 0, 1, height-1}}
 			jobQueue.pushright(jQ, job)
 		end
 	end
-	job = {Q_tposMoveAbs, {tpos, cz, cx, cy}}
+	job = {Q_tposMoveRel, {tpos, 0, 0, 1}}
+	jobQueue.pushright(jQ, job)
+	job = {Q_tposMoveAbs, {tpos, cz, cx, cy+1}}
 	jobQueue.pushright(jQ, job)
 	return ((z+1)*(x+1)*(y)+(x+1))
 end
