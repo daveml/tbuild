@@ -73,7 +73,8 @@ function buildZFill(jQ, tpos, z, x, y)
 	jobQueue.pushright(jQ, job)
 	job = {Q_tposPlaceModeEnable, {tpos}}
 	jobQueue.pushright(jQ, job)
-	return ((z+1)*(x+1)*(y)+(x+1) + tposGetDistance(tpos,cz,cx,cy+1))
+--	return ((z+1)*(x+1)*(y)+(x+1) + tposGetDistance(tpos,cz,cx,cy+1))
+	return ((z+1)*(x+1)*(y)+(x+1)
 end
 
 function buildReturn(jQ, tpos, CanBreak)
@@ -84,7 +85,7 @@ function buildReturn(jQ, tpos, CanBreak)
 	if CanBreak == false then
 		jobQueue.pushright(jQ, {Q_tposBreanOnMoveEnable, {tpos}} )
 	end
-	return tposGetDistance(tpos,0,0,0)
+--	return tposGetDistance(tpos,0,0,0)
 end
 
 function buildBegin(jQ, tpos)
