@@ -370,8 +370,13 @@ end
 
 function tposSetDir(tpos, dir)
 	local newdir = tposDirSubtract(dir, tpos.dir)
-	for count = 1, newdir do
+	if count == 1 then
 		tposTurnRight(tpos,newdir)
+	elseif count == 2 then
+		tposTurnRight(tpos,newdir)
+		tposTurnRight(tpos,newdir)
+	else
+		tposTurnLeft(tpos,newdir)
 	end
 end
 
@@ -475,7 +480,11 @@ function tposPerformMovement(tpos, MoveF, CheckF, str, curpos, nextpos)
 		print("nextpos=",nextpos, " curpos=", curpos)
 		print("Move", str, " failed: check fuel, inventory, clear obstacles")
 		print("press [enter] to continue")
-		read()
+		print("press [r] to refuel")
+		local inp = read()
+		if inp == "r" then
+			Refuel(1, -1)
+		end
 		return false
 	else
 		return true
@@ -548,7 +557,11 @@ end
 function Refuel(slot,count)
 	print("Refueling...to travel: ", count, " blocks")
     print("  using slot: ", slot)
-    turtle.select(1)
+    turtle.select(slot)
+    if count == -1 then
+    	turtle.refuel()
+    	return true
+    end
 	local fuelLevel = turtle.getFuelLevel()
 	while fuelLevel < count do
 		if turtle.refuel(1) == false then
