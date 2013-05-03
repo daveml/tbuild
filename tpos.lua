@@ -264,11 +264,12 @@ function tposPlace(tpos)
 end
 
 function tposDig(tpos)
-	if turtle.dig() == false then
+	if turtle.dig() then
+		return true
+	else
 		tposPrint("dig() failed")
 		return false 
 	end
-	return true
 end
 		
 function tposDigUp(tpos)
@@ -370,13 +371,12 @@ end
 
 function tposSetDir(tpos, dir)
 	local newdir = tposDirSubtract(dir, tpos.dir)
-	if count == 1 then
-		tposTurnRight(tpos,newdir)
-	elseif count == 2 then
-		tposTurnRight(tpos,newdir)
-		tposTurnRight(tpos,newdir)
-	else
-		tposTurnLeft(tpos,newdir)
+	if newdir == 1 then
+		tposTurnRight(tpos)
+	elseif newdir == 2 then
+		tposMoveTurnAround(tpos)
+	elseif newdir == 3 then
+		tposTurnLeft(tpos)
 	end
 end
 
@@ -474,6 +474,7 @@ function tposCheckPosY(tpos, ExpectedY)
 end
 
 function tposPerformMovement(tpos, MoveF, CheckF, str, curpos, nextpos)
+	tposPrint(tpos,"Move"..str.." from "..curpos.." to "..nextpos)
 	MoveF(tpos, nextpos-curpos)
 	if CheckF(tpos, nextpos) == false then
 		tposShow(tpos)
@@ -504,6 +505,7 @@ function tposRecallMoveAbs(tpos, MemIdx)
 end
 
 function tposRecallMoveRel(tpos, MemIdx, z,x,y)
+
 	lpos = tposRecallPosition(tpos, MemIdx)
 	tposMoveAbs(tpos,lpos.z+z,lpos.x+x,lpos.y+y)
 end
