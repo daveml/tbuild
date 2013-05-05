@@ -40,8 +40,9 @@ function tposInit()
 	tpos.dir=1
 	tpos.canBreakOnMove=true
 	tpos.debugPrint=true
+	tpos.fuelSlot=1
 	tpos.placeMode=false
-	tpos.placeSlot=0
+	tpos.placeSlot=2
 	tpos.placeSlotNext=0
 	tpos.PosMemory = {}
 	return tpos
@@ -477,6 +478,9 @@ function tposPerformMovement(tpos, MoveF, CheckF, str, curpos, nextpos)
 	tposPrint(tpos,"Move"..str.." from "..curpos.." to "..nextpos)
 	MoveF(tpos, nextpos-curpos)
 	if CheckF(tpos, nextpos) == false then
+		if tposCheckFuelLevel(tpos) == false then
+			return false
+		end
 		tposShow(tpos)
 		print("nextpos=",nextpos, " curpos=", curpos)
 		print("Move", str, " failed: check fuel, inventory, clear obstacles")
@@ -567,12 +571,23 @@ function Refuel(slot,count)
 	local fuelLevel = turtle.getFuelLevel()
 	while fuelLevel < count do
 		if turtle.refuel(1) == false then
-			print("Insufficuent fuel onboard!")
+			print("Insufficient fuel onboard!")
 			return false
 		end
 		fuelLevel = fuelLevel + turtle.getFuelLevel()
 	end
 	print("Fuel - OK!")
+	return true
+end
+
+function tposCheckFuel(tpos)
+	tposPrint(tpos, "Refueling")
+	if turtle.getFuelLevel() < 10 then
+		turtle.select(tpos.fuelSlot)
+		turtle.refuel(1)
+		turtle.select(tpos.placeSlot)
+		return false
+	end
 	return true
 end
 
