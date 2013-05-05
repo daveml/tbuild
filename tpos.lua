@@ -478,7 +478,7 @@ function tposPerformMovement(tpos, MoveF, CheckF, str, curpos, nextpos)
 	tposPrint(tpos,"Move"..str.." from "..curpos.." to "..nextpos)
 	MoveF(tpos, nextpos-curpos)
 	if CheckF(tpos, nextpos) == false then
-		if tposCheckFuelLevel(tpos) == false then
+		if tposCheckFuel(tpos) == false then
 			return false
 		end
 		tposShow(tpos)
