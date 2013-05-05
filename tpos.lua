@@ -481,7 +481,7 @@ function tposPerformMovement(tpos, MoveF, CheckF, str, curpos, nextpos)
 	if CheckF(tpos, nextpos) == false then
 		if tposCheckFuel(tpos) == false then
 			return false
-		elseif tpos.moveSuccess = true
+		elseif tpos.moveSuccess == true then
 			tpos.moveSuccess = false
 			-- retry from gravel/sand fall
 			os.sleep(4)
