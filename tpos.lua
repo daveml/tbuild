@@ -45,6 +45,7 @@ function tposInit()
 	tpos.placeSlot=2
 	tpos.placeSlotNext=0
 	tpos.PosMemory = {}
+	tpos.moveSuccess = false
 	return tpos
 end
 
@@ -480,7 +481,13 @@ function tposPerformMovement(tpos, MoveF, CheckF, str, curpos, nextpos)
 	if CheckF(tpos, nextpos) == false then
 		if tposCheckFuel(tpos) == false then
 			return false
+		elseif tpos.moveSuccess = true
+			tpos.moveSuccess = false
+			-- retry from gravel/sand fall
+			os.sleep(4)
+			return false
 		end
+			
 		tposShow(tpos)
 		print("nextpos=",nextpos, " curpos=", curpos)
 		print("Move", str, " failed: check fuel, inventory, clear obstacles")
@@ -492,6 +499,7 @@ function tposPerformMovement(tpos, MoveF, CheckF, str, curpos, nextpos)
 		end
 		return false
 	else
+		tpos.moveSuccess = true
 		return true
 	end		
 end
