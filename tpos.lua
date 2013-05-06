@@ -492,6 +492,7 @@ function tposPerformMovement(tpos, MoveF, CheckF, str, curpos, nextpos)
 		elseif tpos.retryMoveCount > 0 then
 			os.sleep(2)
 			tpos.retryMoveCount = tpos.retryMoveCount - 1
+			return false
 		end
 			
 		tposShow(tpos)
