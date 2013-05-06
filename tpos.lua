@@ -48,7 +48,6 @@ function tposInit()
 	tpos.PosMemory = {}
 	tpos.moveSuccess = false
 	tpos.retryMoveCount = __retryMoveCount
-	tpos.retryMoveCount
 	return tpos
 end
 
