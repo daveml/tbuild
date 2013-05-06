@@ -487,11 +487,11 @@ function tposPerformMovement(tpos, MoveF, CheckF, str, curpos, nextpos)
 			tpos.moveSuccess = false
 			-- retry from gravel/sand fall
 			os.sleep(2)
-			tpos.retryMoveCount = retryMoveCount - 1
+			tpos.retryMoveCount = tpos.retryMoveCount - 1
 			return false
 		elseif tpoe.retryMoveCount > 0 then
 			os.sleep(2)
-			tpos.retryMoveCount = retryMoveCount - 1
+			tpos.retryMoveCount = tpos.retryMoveCount - 1
 		end
 			
 		tposShow(tpos)
