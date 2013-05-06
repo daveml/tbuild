@@ -47,7 +47,7 @@ function tposInit()
 	tpos.placeSlotNext=0
 	tpos.PosMemory = {}
 	tpos.moveSuccess = false
-	tpos.retryMoveCount = 10
+	tpos.retryMoveCount = __retryMoveCount
 	tpos.retryMoveCount
 	return tpos
 end
