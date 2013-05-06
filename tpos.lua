@@ -17,6 +17,7 @@ local __LOCK_TABLE = {}
 GLOBAL_lock(__LOCK_TABLE)
 
 local __turtleMaxSlot = 16
+local __retryMoveCount = 10
 
 function usage()
 
@@ -46,6 +47,7 @@ function tposInit()
 	tpos.placeSlotNext=0
 	tpos.PosMemory = {}
 	tpos.moveSuccess = false
+	tpos.retryMoveCount = __retryMoveCount
 	return tpos
 end
 
@@ -484,8 +486,12 @@ function tposPerformMovement(tpos, MoveF, CheckF, str, curpos, nextpos)
 		elseif tpos.moveSuccess == true then
 			tpos.moveSuccess = false
 			-- retry from gravel/sand fall
-			os.sleep(4)
+			os.sleep(2)
+			tpos.retryMoveCount = retryMoveCount - 1
 			return false
+		elseif tpoe.retryMoveCount > 0 then
+			os.sleep(2)
+			tpos.retryMoveCount = retryMoveCount - 1
 		end
 			
 		tposShow(tpos)
@@ -500,6 +506,7 @@ function tposPerformMovement(tpos, MoveF, CheckF, str, curpos, nextpos)
 		return false
 	else
 		tpos.moveSuccess = true
+		tpos.retryMoveCount = __retryMoveCount
 		return true
 	end		
 end
